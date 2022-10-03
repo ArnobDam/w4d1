@@ -49,14 +49,14 @@ class KnightPathFinder
     end
 
     def find_path(end_pos)
-        node = @root_node.bfs(end_pos)
+        node = @root_node.dfs(end_pos)
         trace_path_back(node)
     end
 
     def trace_path_back(node)
         pos_array = []
         until node.nil?
-            pos_array << node.value
+            pos_array.unshift(node.value)
             node = node.parent
         end
         pos_array
@@ -68,5 +68,6 @@ k = KnightPathFinder.new([0,0])
 
 tree = k.build_move_tree
 
-p k.find_path([5,5])
+p k.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+p k.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
 
