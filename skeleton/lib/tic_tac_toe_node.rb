@@ -2,7 +2,7 @@ require_relative 'tic_tac_toe'
 require "byebug"
 
 class TicTacToeNode
-  attr_reader :board, :next_mover_mark
+  attr_reader :board, :next_mover_mark, :prev_move_pos
   def initialize(board, next_mover_mark, prev_move_pos = nil)
     @board = board
     # @next_mover_mark == :x ? @next_mover_mark = :o : @next_mover_mark = :x
@@ -23,18 +23,20 @@ class TicTacToeNode
     
     # debugger
     # arr = @board.rows
-    orig_dup = @board.dup
+    nodes_arr = []
+    # orig_dup = @board.dup
     (0..2).each do |i|
       (0..2).each do |j|
-        if @board.[[i,j]].nil?
-          arr = orig_dup
-          new_board = deep_dup(arr)
-          new_board[i][j] = @next_mover_mark
-          @board[[i,j]] = TicTacToeNode.new(new_board, @next_mover_mark, [i,j])
+        if @board[[i,j]].nil?
+          new_board = @board.dup
+          new_board[[i,j]] = @next_mover_mark
+          @next_mover_mark == :x ? child_mark = :o : child_mark = :x
+          nodes_arr << TicTacToeNode.new(new_board, child_mark, [i,j])
         end
       end
     end
     # @board.rows.flatten
+    nodes_arr
   end
 
   # def deep_dup(board)
