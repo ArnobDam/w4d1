@@ -11,6 +11,19 @@ class TicTacToeNode
   end
 
   def losing_node?(evaluator)
+    # debugger
+    # if evaluator == :o and board.over? and board.winner == evaluator return true
+    return true if board.over? && evaluator == :x && board.winner == :o
+    # return true if board.over? && board.winner != evaluator 
+    # && board.winner != nil
+    # return false if board.over? && board.winner == evaluator
+    #  || board.winner == nil
+    # debugger
+    if evaluator == :x
+      children.all? {|child| child.losing_node?(evaluator)}
+    else
+      children.any? {|child| child.losing_node?(evaluator)}
+    end
   end
 
   def winning_node?(evaluator)
@@ -19,12 +32,8 @@ class TicTacToeNode
   # This method generates an array of all moves that can be made after
   # the current move.
   def children
-    # @next_mover_mark == :x ? @next_mover_mark = :o : @next_mover_mark = :x
-    
-    # debugger
-    # arr = @board.rows
     nodes_arr = []
-    # orig_dup = @board.dup
+
     (0..2).each do |i|
       (0..2).each do |j|
         if @board[[i,j]].nil?
@@ -35,12 +44,6 @@ class TicTacToeNode
         end
       end
     end
-    # @board.rows.flatten
     nodes_arr
   end
-
-  # def deep_dup(board)
-  #   # arr = board.rows
-  #   board.map {|ele| ele.is_a?(Array) ? deep_dup(ele) : ele}
-  # end
 end
