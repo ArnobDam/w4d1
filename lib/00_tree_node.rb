@@ -51,11 +51,11 @@ class PolyTreeNode
         nil
     end
 
-    # def inspect
-    #     puts
-    #     p value
-    #     children.each {|child| p child.value}
-    # end
+    def inspect
+        puts
+        p value
+        # children.each {|child| p child.value}
+    end
 end
 
 # [[6,3],[4,2],[2,1],[0,0]]
