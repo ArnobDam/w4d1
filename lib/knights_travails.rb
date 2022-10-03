@@ -7,7 +7,7 @@ class KnightPathFinder
         all_position_changes = [[1,2],[-1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,1],[-2,-1]]
         all_position_changes.each do |position_change|
             new_position = [position_change[0] + position[0], position_change[1] + position[1]]
-            if new_position[0] < 7 && new_position[0] >= 0 && new_position[1] < 7 && new_position[1] >= 0
+            if new_position[0] < 8 && new_position[0] >= 0 && new_position[1] < 8 && new_position[1] >= 0
                 move_array << new_position
             end
         end
